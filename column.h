@@ -5,6 +5,7 @@
 #ifndef PROJET_LANGAGE_C_COLUMN_H
 #define PROJET_LANGAGE_C_COLUMN_H
 #define REALLOC_SIZE = 256
+#include <stdlib.h>
 
 typedef int Data;
 
@@ -17,4 +18,6 @@ typedef struct {
 
 void insertValue(Column *column, Data value);
 Column *createColumn(char* title);
-#endif //PROJET_LANGAGE_C_COLUMN_H
+
+
+#endif PROJET_LANGAGE_C_COLUMN_H
