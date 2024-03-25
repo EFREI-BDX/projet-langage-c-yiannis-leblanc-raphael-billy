@@ -3,4 +3,5 @@ project(Projet_Langage_C C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Projet_Langage_C main.c)
+add_executable(Projet_Langage_C main.c
+        column.h)
