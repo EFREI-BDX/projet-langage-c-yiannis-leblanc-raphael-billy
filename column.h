@@ -4,8 +4,9 @@
 
 #ifndef PROJET_LANGAGE_C_COLUMN_H
 #define PROJET_LANGAGE_C_COLUMN_H
-#define REALLOC_SIZE = 256
+#define REALLOC_SIZE 256
 #include <stdlib.h>
+#include <string.h>
 
 typedef int Data;
 
