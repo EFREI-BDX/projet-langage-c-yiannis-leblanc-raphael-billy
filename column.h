@@ -4,7 +4,7 @@
 
 #ifndef PROJET_LANGAGE_C_COLUMN_H
 #define PROJET_LANGAGE_C_COLUMN_H
-
+#define REALLOC_SIZE = 256
 
 typedef int Data;
 
