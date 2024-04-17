@@ -13,3 +13,12 @@ Column *createColumn(char* title){
     column->values = NULL;
     return column;
 }
+
+void insertValue(Column *column, Data value){
+    if (column->logicalSize == column->physicalSize){
+        column->physicalSize += REALLOC_SIZE;
+        column->values = (Data*) realloc(column->values, column->physicalSize * sizeof(Data));
+    }
+    column->values[column->logicalSize] = value;
+    column->logicalSize+=1;
+}
