@@ -14,6 +14,12 @@ Column *createColumn(char* title){
     return column;
 }
 
+void delete_column(Column** col) {
+    free((*col)->values);
+    free((*col)->title);
+    free(*col);
+}
+
 void insertValue(Column *column, Data value){
     if (column->logicalSize == column->physicalSize){
         column->physicalSize += REALLOC_SIZE;

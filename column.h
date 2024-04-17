@@ -21,5 +21,7 @@ void insertValue(Column *column, Data value);
 
 Column* createColumn(char* title);
 
+void delete_column(Column** col);
+
 
 #endif PROJET_LANGAGE_C_COLUMN_H
