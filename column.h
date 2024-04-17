@@ -7,6 +7,7 @@
 #define REALLOC_SIZE 256
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 typedef int Data;
 
@@ -23,5 +24,8 @@ Column* createColumn(char* title);
 
 void delete_column(Column** col);
 
+void print_col(Column* col);
+
+int return_value_by_index(Column col, int i);
 
 #endif PROJET_LANGAGE_C_COLUMN_H
