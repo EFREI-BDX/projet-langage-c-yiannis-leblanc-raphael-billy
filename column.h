@@ -7,6 +7,7 @@
 #define REALLOC_SIZE 256
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 typedef int Data;
 
@@ -27,5 +28,8 @@ int nb_equal_values(Column col, int x);
 int nb_lower_values(Column col, int x);
 int nb_higher_values(Column col, int x);
 
+void print_col(Column* col);
+
+int return_value_by_index(Column col, int i);
 
 #endif PROJET_LANGAGE_C_COLUMN_H

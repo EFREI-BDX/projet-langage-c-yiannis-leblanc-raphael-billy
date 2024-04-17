@@ -55,3 +55,14 @@ void insertValue(Column *column, Data value){
     column->values[column->logicalSize] = value;
     column->logicalSize+=1;
 }
+
+void print_col(Column* col){
+    for(int i = 0; i<col->logicalSize; i++)
+        printf("[%d] %d\n", i, col->values[i]);
+}
+
+
+int return_value_by_index(Column col, int i){
+    return col.values[i];
+}
+
