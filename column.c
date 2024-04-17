@@ -20,6 +20,33 @@ void delete_column(Column** col) {
     free(*col);
 }
 
+int nb_equal_values(Column col, int x)
+{
+    int occurr = 0;
+    for (int i = 0; i < col.logicalSize; i++)
+        if (col.values[i] == x)
+            occurr++;
+    return occurr;
+}
+
+int nb_lower_values(Column col, int x)
+{
+    int occurr = 0;
+    for (int i = 0; i < col.logicalSize; i++)
+        if (col.values[i] < x)
+            occurr++;
+    return occurr;
+}
+
+int nb_higher_values(Column col, int x)
+{
+    int occurr = 0;
+    for (int i = 0; i < col.logicalSize; i++)
+        if (col.values[i] > x)
+            occurr++;
+    return occurr;
+}
+
 void insertValue(Column *column, Data value){
     if (column->logicalSize == column->physicalSize){
         column->physicalSize += REALLOC_SIZE;

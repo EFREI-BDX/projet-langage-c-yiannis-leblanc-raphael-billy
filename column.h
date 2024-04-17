@@ -23,5 +23,9 @@ Column* createColumn(char* title);
 
 void delete_column(Column** col);
 
+int nb_equal_values(Column col, int x);
+int nb_lower_values(Column col, int x);
+int nb_higher_values(Column col, int x);
+
 
 #endif PROJET_LANGAGE_C_COLUMN_H
