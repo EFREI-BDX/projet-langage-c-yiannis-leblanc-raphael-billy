@@ -18,7 +18,8 @@ typedef struct {
 } Column;
 
 void insertValue(Column *column, Data value);
-Column *createColumn(char* title);
+
+Column* createColumn(char* title);
 
 
 #endif PROJET_LANGAGE_C_COLUMN_H
