@@ -25,12 +25,7 @@ void add_line(CDataframe tab);
 void del_line(CDataframe tab);
 void add_col(CDataframe tab);
 void rename_col(CDataframe tab, int col);
-void is_in(CDataframe tab, Data x);
-
-
-
-
-
+void is_present(CDataframe tab, Data x);
 int nb_ligne(CDataframe);
 int nb_colonne(CDataframe);
 int nb_equal_values(CDataframe , Data x);
