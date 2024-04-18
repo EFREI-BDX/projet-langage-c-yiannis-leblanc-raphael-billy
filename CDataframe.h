@@ -14,23 +14,23 @@ typedef struct {
 typedef CDLink* CDataframe;
 
 CDataframe* new_cdataframe();
-void fill_blank_cdataframe(int nbCol, int nbLine);
-void fill_cdataframe_input(int nbCol, int nbLine);
-void set_value(int col, int line, Data x);
-void print_cdataframe(CDataframe tab);
-void print_lines(int line1, int line2);
-void print_lines_input();
-void print_col(int col1, int col2);
+void fill_blank_cdata(CDataframe tab, int nbCol, int nbLine);
+void fill_cdata_input(CDataframe tab, int nbCol, int nbLine);
+void set_value(CDataframe tab, int col, int line, Data x);
+void print_cdata(CDataframe tab);
+void print_cdata_lines(CDataframe tab, int line1, int line2);
+void print_cdata_lines_input(CDataframe tab);
+void print_cdata_col(CDataframe tab, int col1, int col2);
 void add_line(CDataframe tab);
-void del_line(CDataframe tab);
+void del_line(CDataframe tab, int line);
 void add_col(CDataframe tab);
-void rename_col(CDataframe tab, int col);
-void is_present(CDataframe tab, Data x);
-int nb_ligne(CDataframe);
-int nb_colonne(CDataframe);
-int nb_equal_values(CDataframe , Data x);
-void nb_higher_values(CDataframe , Data x);
-void nb_lower_values(CDataframe , Data x);
-void nom_colonne(CDataframe);
+void rename_cdata_col(CDataframe tab, int col);
+void in_cdata(CDataframe tab, Data x);
+int nb_ligne(CDataframe tab);
+int nb_colonne(CDataframe tab);
+int nb_equal_cdata(CDataframe tab, Data x);
+void nb_higher_cdata(CDataframe tab, Data x);
+void nb_lower_cdata(CDataframe tab, Data x);
+void nom_colonne(CDataframe tab);
 
 #endif
