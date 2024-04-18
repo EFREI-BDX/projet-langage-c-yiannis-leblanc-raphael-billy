@@ -20,7 +20,7 @@ void delete_column(Column** col) {
     free(*col);
 }
 
-int nb_equal_values(Column col, int x)
+int nb_equal_values(Column col, Data x)
 {
     int occurr = 0;
     for (int i = 0; i < col.logicalSize; i++)
@@ -29,7 +29,7 @@ int nb_equal_values(Column col, int x)
     return occurr;
 }
 
-int nb_lower_values(Column col, int x)
+int nb_lower_values(Column col, Data x)
 {
     int occurr = 0;
     for (int i = 0; i < col.logicalSize; i++)
@@ -38,7 +38,7 @@ int nb_lower_values(Column col, int x)
     return occurr;
 }
 
-int nb_higher_values(Column col, int x)
+int nb_higher_values(Column col, Data x)
 {
     int occurr = 0;
     for (int i = 0; i < col.logicalSize; i++)
@@ -62,7 +62,7 @@ void print_col(Column* col){
 }
 
 
-int return_value_by_index(Column col, int i){
+int return_value_by_index(Column col, Data i){
     return col.values[i];
 }
 
