@@ -1,1 +1,24 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/K8_LD0kY)
+# Projet CDataframe
+
+Explication de la structure CDataframe : 
+La structure Column contient les attributs suivant : 
+- titre
+- deux entiers tailles physique et logique
+- ainsi qu'un tableau de Data.
+Les Column sont stockés sous forme de liste-chaînée dans le CDataframe.
+La structure maillon CDLink contient :
+- un Column
+- la taille de celui-ci
+- L'adresse de CDLink suivant
+
+
+
+## Liens utiles
+
+ - [Repository](https://github.com/EFREI-BDX/projet-langage-c-yiannis-leblanc-raphael-billy)
+
+
+## Authors
+
+- [@YiannisLeblanc](https://github.com/YiannisLeblanc)
+- [@RaphaelBilly](https://github.com/RaphaelBilly)
