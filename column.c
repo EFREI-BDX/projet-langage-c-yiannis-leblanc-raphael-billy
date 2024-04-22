@@ -55,12 +55,12 @@ int nb_higher_values(Column col, Data x)
 }
 
 void insertValue(Column *column, Data value){ 
-    if (column->logicalSize == column->physicalSize || column->values == NULL){
-        column->physicalSize += REALLOC_SIZE;
-        Column* newValues = (Data*)realloc(column->values, column->physicalSize * sizeof(Data));
+    if (column->logicalSize == column->physicalSize){
+        Column* newValues = (Data*)realloc(column->values, column->physicalSize + REALLOC_SIZE * sizeof(Data));
         if (newValues == NULL) return;
  
         column->values = newValues;
+        column->physicalSize += REALLOC_SIZE;
     }
     column->values[column->logicalSize] = value;
     column->logicalSize+=1;

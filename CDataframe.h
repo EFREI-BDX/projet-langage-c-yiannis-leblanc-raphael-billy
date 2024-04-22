@@ -9,10 +9,9 @@ typedef struct {
 	CDLink* next;
 	int len;
 } CDLink;
-
 typedef CDLink* CDataframe;
 
-CDataframe* new_cdataframe();
+CDataframe* new_cdataframe();//Yiannis
 void fill_blank_cdata(CDataframe tab, int nbCol, int nbLine);
 
 void print_cdata_col_input(CDataframe tab);
@@ -26,7 +25,7 @@ void print_cdata(CDataframe tab);
 void print_cdata_lines(CDataframe tab, int line1, int line2);
 void print_cdata_col(CDataframe tab, int col1, int col2);
 void print_col_names(CDataframe tab);
-
+// Raph
 void add_line(CDataframe* tab);
 void del_line(CDataframe* tab, int line);
 void add_col(CDataframe* tab);
