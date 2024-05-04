@@ -28,12 +28,11 @@ void print_col_names(CDataframe tab);
 
 void add_line(CDataframe* tab);
 void del_line(CDataframe* tab, int line);
-// Raph
 void add_col(CDataframe* tab);
 void del_col(CDataframe* tab, int line);
 
 void rename_cdata_col(CDataframe tab, int col);
-
+// Raph
 int in_cdata(CDataframe tab, Data x);
 int nb_ligne(CDataframe tab);
 int nb_colonne(CDataframe tab);
