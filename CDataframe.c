@@ -26,6 +26,20 @@ void print_cdata(CDataframe tab) {
 }
 
 void print_cdata_lines(CDataframe tab, int line1, int line2) {
+	if (tab == NULL) return;
+
+	CDLink* sub_tab;
+	for (int j = line1 ; j<=line2;j++){
+		sub_tab = tab;
+		do {
+			if (j < sub_tab->col->logicalSize) {
+				printf("%d", sub_tab->col->values[j]);
+			}
+			printf("\t");
+			sub_tab = sub_tab->next;
+		} while (sub_tab->next != NULL);
+		printf("\n");
+	}
 }
 
 void print_cdata_col(CDataframe tab, int col1, int col2) {
