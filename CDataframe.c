@@ -85,6 +85,7 @@ void add_col(CDataframe* tab) {
 }
 
 void del_col(CDataframe* tab, int line) {
+
 }
 
 void rename_cdata_col(CDataframe tab, int col) {
@@ -121,19 +122,31 @@ int nb_colonne(CDataframe tab) {
 }
 
 int nb_equal_cdata(CDataframe tab, Data x) {
-    int occurr = 0;
-    CDLink* current_link = tab;
-    while (current_link != NULL) {
-        occurr += nb_equal_values(*(current_link->col), x);
-        current_link = current_link->next;
+    int occurrence = 0;
+    CDLink* maillon = tab;
+    while (maillon != NULL) {
+        occurrence += nb_equal_values(*(maillon->col), x);
+        maillon = maillon->next;
     }
-    return occurr;
+    return occurrence;
 }
 
 int nb_higher_cdata(CDataframe tab, Data x) {
-	return 0;
+    int compteur = 0;
+    CDLink* maillon = tab;
+    while (maillon != NULL) {
+        compteur += nb_higher_values(*(maillon->col), x);
+        maillon = maillon->next;
+    }
+    return compteur;
 }
 
 int nb_lower_cdata(CDataframe tab, Data x) {
-	return 0;
+    int compteur = 0;
+    CDLink* maillon = tab;
+    while (maillon != NULL) {
+        compteur += nb_lower_values(*(maillon->col), x);
+        maillon = maillon->next;
+    }
+    return compteur;
 }
