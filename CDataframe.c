@@ -68,7 +68,7 @@ void print_cdata_lines(CDataframe tab, int line1, int line2) {
 		printf("\n");
 	}
 }
-
+ 
 void print_cdata_col(CDataframe tab, int col1, int col2) {
 }
 
@@ -81,10 +81,43 @@ void add_line(CDataframe* tab) {
 void del_line(CDataframe* tab, int line) {
 }
 
-void add_col(CDataframe* tab) {
+void add_col(CDataframe* tab) { 
+    CDLink* new_link = (CDLink*)malloc(sizeof(CDLink));
+    if (new_link == NULL) return;
+    
+    Column* new_col = (Column*)malloc(sizeof(Column));
+    if (new_col == NULL) {
+        free(new_link);
+        return;
+    }
+    new_link->col = new_col;
+    new_link->next = NULL;
+    if (*tab == NULL) {
+        *tab = new_link;
+        return;
+    }
+
+    CDLink* last = *tab;
+    while (last->next != NULL) {
+        last = last->next;
+    }
+    last->next = new_link;
 }
 
-void del_col(CDataframe* tab, int line) {
+void del_col(CDataframe* tab, int col) {
+    if (*tab == NULL) return;
+
+    CDLink** previous = tab;
+    for (int i = 0; i <= (col-1); i++) {
+        if ((*previous)->next == NULL) return;
+
+        previous = &(*previous)->next;
+    }
+    CDLink* temp = (*previous)->next;
+    (*previous) = temp->next;
+    free(temp->col->values);
+    free(temp->col);
+    free(temp);
 }
 
 void rename_cdata_col(CDataframe tab, int col) {
