@@ -82,15 +82,26 @@ void print_cdata_lines(CDataframe tab, int line1, int line2) {
 }
 
 void print_cdata_col(CDataframe tab, int col1, int col2) {
+
 }
 
 void print_col_names(CDataframe tab) {
+    if (tab == NULL) return;
+    int i =0;
+    CDLink* maillon = tab;
+    while (maillon != NULL) {
+        printf("colonne numéro %d : %s\t", i++, maillon->col->title);
+        maillon = maillon->next;
+    }
+    printf("\n");
 }
 
 void add_line(CDataframe* tab) {
+
 }
 
 void del_line(CDataframe* tab, int line) {
+
 }
 
 void add_col(CDataframe* tab) {
@@ -145,13 +156,13 @@ int in_cdata(CDataframe tab, Data x) {
 }
 
 int nb_ligne(CDataframe tab) {
-    CDLink* current_link = tab;
+    CDLink* maillon = tab;
     int max = 0;
-    while (current_link != NULL) {
-        if (current_link->col->logicalSize > max) {
-            max = current_link->col->logicalSize;
+    while (maillon != NULL) {
+        if (maillon->col->logicalSize > max) {
+            max = maillon->col->logicalSize;
         }
-        current_link = current_link->next;
+        maillon = maillon->next;
     }
     return max;
 }
