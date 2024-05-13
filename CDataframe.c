@@ -8,9 +8,21 @@ void fill_blank_cdata(CDataframe tab, int nbCol, int nbLine) {
 }
 
 void print_cdata_col_input(CDataframe tab) {
+    int col1, col2;
+    printf("Saisir le premier indice : ");
+    scanf("%d", &col1);
+    printf("Saisir le dernier indice : ");
+    scanf("%d", &col2);
+    if (col1 < 0 || col2<0 || col1>col2) {
+        printf("Les valeurs sont non conformes...\n");
+        return;
+    }
+
+    print_cdata_col(tab, col1, col2);
 }
 
 void fill_cdata_input(CDataframe tab, int nbCol, int nbLine) {
+    return;
 }
 
 void set_value_input(CDataframe tab) {
@@ -85,7 +97,9 @@ void add_col(CDataframe* tab) {
     CDLink* new_link = (CDLink*)malloc(sizeof(CDLink));
     if (new_link == NULL) return;
     
-    Column* new_col = (Column*)malloc(sizeof(Column));
+    printf("Saisir le nom de la colonne : ");
+    char* name;
+    Column* new_col = createColumn(name);
     if (new_col == NULL) {
         free(new_link);
         return;
