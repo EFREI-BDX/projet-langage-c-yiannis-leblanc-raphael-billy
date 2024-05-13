@@ -4,15 +4,29 @@ CDataframe* new_cdataframe() {
 	return NULL;
 }
 
-void fill_blank_cdata(CDataframe tab, int nbCol, int nbLine) {
+void fill_blank_cdata(CDataframe* tab, int nbCol, int nbLine)
+{
+}
+
+void fill_blank_cdata_input(CDataframe* tab) {
+    int nbCol, nbLine;
+    printf("Saisir le nombre de colonnes : ");
+    if (!scanf("%d", &nbCol)) return;
+
+    printf("Saisir le nombre de lignes : ");
+    if (!scanf("%d", &nbLine)) return;
+
+    fill_blank_cdata(tab, nbCol, nbLine);
 }
 
 void print_cdata_col_input(CDataframe tab) {
     int col1, col2;
     printf("Saisir le premier indice : ");
-    scanf("%d", &col1);
+    if (!scanf("%d", &col1)) return;
+
     printf("Saisir le dernier indice : ");
-    scanf("%d", &col2);
+    if (!scanf("%d", &col2)) return;
+
     if (col1 < 0 || col2<0 || col1>col2) {
         printf("Les valeurs sont non conformes...\n");
         return;
@@ -21,7 +35,19 @@ void print_cdata_col_input(CDataframe tab) {
     print_cdata_col(tab, col1, col2);
 }
 
-void fill_cdata_input(CDataframe tab, int nbCol, int nbLine) {
+void fill_cdata_input(CDataframe* tab) {
+    int nbCol, nbLine;
+    printf("Saisir le nombre de colonnes : ");
+    if (!scanf("%d", &nbCol)) return;
+
+    printf("Saisir le nombre de lignes : ");
+    if (!scanf("%d", &nbLine)) return;
+
+    fill_cdata(tab, nbCol, nbLine);
+}
+
+void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
+
     return;
 }
 
@@ -30,11 +56,14 @@ void set_value_input(CDataframe tab) {
     int ligne;
     Data x;
     printf("Dans quelle colonne ? : ");
-    scanf("%d" , &col);
+    if (!scanf("%d" , &col)) return;
+
     printf("A quelle ligne ? : ");
-    scanf("%d" , &ligne);
+    if (!scanf("%d" , &ligne)) return;
+
     printf("Quelle valeur ? : ");
-    scanf("%d" , &x);
+    if (!scanf("%d" , &x)) return;
+
     set_value(tab, col, ligne, x);
 }
 
@@ -42,7 +71,7 @@ void print_cdata_lines_input(CDataframe tab) {
     int line1;
     int line2;
     printf("De quelle ligne à quelle ligne voulez-vous afficher ? : ");
-    scanf("%d %d", &line1, &line2);
+    if (scanf("%d %d", &line1, &line2)!=2) return;
     print_cdata_lines(tab, line1, line2);
 }
 
@@ -98,7 +127,12 @@ void add_col(CDataframe* tab) {
     if (new_link == NULL) return;
 
     printf("Saisir le nom de la colonne : ");
-    char* name;
+    char name[TITLE_INPUT_SIZE];
+    if (!scanf("%s", name)) {
+        free(new_link);
+        return;
+    }
+
     Column* new_col = createColumn(name);
     if (new_col == NULL) {
         free(new_link);
@@ -129,8 +163,7 @@ void del_col(CDataframe* tab, int col) {
     }
     CDLink* temp = (*previous)->next;
     (*previous) = temp->next;
-    free(temp->col->values);
-    free(temp->col);
+    delete_column(&temp->next);
     free(temp);
 }
 

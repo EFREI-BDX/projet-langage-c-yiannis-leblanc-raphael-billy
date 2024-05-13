@@ -12,10 +12,14 @@ typedef struct CDLink CDLink;
 typedef CDLink* CDataframe;
 
 CDataframe* new_cdataframe();
+void fill_blank_cdata_input(CDataframe* tab);
 void fill_blank_cdata(CDataframe* tab, int nbCol, int nbLine);
 
 void print_cdata_col_input(CDataframe tab);
-void fill_cdata_input(CDataframe* tab, int nbCol, int nbLine);//Raph
+
+void fill_cdata_input(CDataframe* tab);
+void fill_cdata(CDataframe* tab, int nbCol, int nbLine);
+//Raph
 void set_value_input(CDataframe tab);//Raph
 void print_cdata_lines_input(CDataframe tab);//Raph
 
