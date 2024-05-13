@@ -47,8 +47,16 @@ void fill_cdata_input(CDataframe* tab) {
 }
 
 void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
+    if (*tab == NULL) return;
 
-    return;
+    Data value;
+    for (int i = 0; i < nbCol; i++) {
+        add_col(tab);
+        for (int j = 0; j < nbLine; j++) {
+            printf("Saisir la valeur en colonne %d ligne %d : ",i,j);
+            if(scanf("%d", &value)) set_value(*tab, i, j, value);
+        }
+    }
 }
 
 void set_value_input(CDataframe tab) {
@@ -76,17 +84,16 @@ void print_cdata_lines_input(CDataframe tab) {
 }
 
 void set_value(CDataframe tab, int col, int line, Data x) {
-    if (col > nb_colonne(tab) || line > nb_ligne(tab)) {
-        printf("Erreur : la ligne ou la colonne n'existe pas\n");
-        return;
+    if (col > nb_colonne(tab)) return;
+    
+    CDLink* current_link = tab;
+    for (int i = 0; i < col; i++) {
+        current_link = current_link->next;
     }
-    else {
-        CDLink* current_link = tab;
-        for (int i = 0; i < col; i++) {
-            current_link = current_link->next;
-        }
-        insertValue(current_link->col, x);
-    }
+    if (line > current_link->col->logicalSize) return;
+
+    insertValue(current_link->col, x);
+    
 }
 
 void print_cdata(CDataframe tab) {
@@ -178,7 +185,19 @@ void del_col(CDataframe* tab, int col) {
     free(temp);
 }
 
-void rename_cdata_col(CDataframe tab, int col) {
+void rename_cdata_col_input(CDataframe tab) {
+    printf("Quelle colonne voulez-vous renommer ? : ");
+    int col;
+    if (!scanf("%d", &col)) return;
+
+    printf("Saisir le nouveau nom de la colonne : ");
+    char name[TITLE_INPUT_SIZE];
+    if (!scanf("%s", name)) return;
+
+    rename_cdata_col(tab, col, name);
+}
+
+void rename_cdata_col(CDataframe tab, int col, char* name) {
 }
 
 int in_cdata(CDataframe tab, Data x) {
