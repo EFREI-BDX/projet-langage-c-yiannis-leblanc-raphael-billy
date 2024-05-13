@@ -35,7 +35,7 @@ void print_cdata_lines_input(CDataframe tab) {
 }
 
 void set_value(CDataframe tab, int col, int line, Data x) {
-    if col > nb_colonne(tab) || line > nb_colonne(line) {
+    if (col > nb_colonne(tab) || line > nb_ligne(tab)) {
         printf("Erreur : la ligne ou la colonne n'existe pas\n");
         return;
     }
@@ -124,19 +124,43 @@ void rename_cdata_col(CDataframe tab, int col) {
 }
 
 int in_cdata(CDataframe tab, Data x) {
-	return 0;
+    if(nb_equal_cdata(tab, x)>0){
+        return 1;
+    }
+    else return 0;
 }
 
 int nb_ligne(CDataframe tab) {
-	return 0;
+    CDLink* current_link = tab;
+    int max = 0;
+    while (current_link != NULL) {
+        if (current_link->col->logicalSize > max) {
+            max = current_link->col->logicalSize;
+        }
+        current_link = current_link->next;
+    }
+    return max;
 }
 
+
 int nb_colonne(CDataframe tab) {
+    int nb_col = 0;
+    CDLink* current_link = tab;
+    while (current_link != NULL) {
+        nb_col++;
+        current_link = current_link->next;
+    }
 	return 0;
 }
 
 int nb_equal_cdata(CDataframe tab, Data x) {
-	return 0;
+    int occurr = 0;
+    CDLink* current_link = tab;
+    while (current_link != NULL) {
+        occurr += nb_equal_values(*(current_link->col), x);
+        current_link = current_link->next;
+    }
+    return occurr;
 }
 
 int nb_higher_cdata(CDataframe tab, Data x) {
