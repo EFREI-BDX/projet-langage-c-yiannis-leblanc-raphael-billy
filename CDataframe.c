@@ -4,8 +4,25 @@ CDataframe* new_cdataframe() {
 	return NULL;
 }
 
-void fill_blank_cdata(CDataframe* tab, int nbCol, int nbLine)
-{
+CDLink* get_cdlink(CDataframe tab, int col) {
+    for (int i = 0; i < col ; i++) {
+        if (tab == NULL) return NULL;
+
+        tab = tab->next;
+    }
+    return tab;
+}
+
+void fill_blank_cdata(CDataframe* tab, int nbCol, int nbLine) {
+    if (*tab != NULL) return;
+
+    Data value = 0;
+    for (int i = 0; i < nbCol; i++) {
+        add_col(tab, i);
+        for (int j = 0; j < nbLine; j++) {
+            set_value(*tab, i, j, value);
+        }
+    }
 }
 
 void fill_blank_cdata_input(CDataframe* tab) {
@@ -47,11 +64,11 @@ void fill_cdata_input(CDataframe* tab) {
 }
 
 void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
-    if (*tab == NULL) return;
+    if (*tab != NULL) return;
 
     Data value;
     for (int i = 0; i < nbCol; i++) {
-        add_col(tab);
+        add_col(tab, i);
         for (int j = 0; j < nbLine; j++) {
             printf("Saisir la valeur en colonne %d ligne %d : ",i,j);
             if(scanf("%d", &value)) set_value(*tab, i, j, value);
@@ -118,7 +135,23 @@ void print_cdata_lines(CDataframe tab, int line1, int line2) {
 }
 
 void print_cdata_col(CDataframe tab, int col1, int col2) {
+    if (tab == NULL) return;
 
+    CDataframe subTab = get_cdlink(tab,col1);
+    CDLink* temp=subTab;
+    for (int i = 0; i < col1; i++) {
+        if (temp == NULL) return;
+
+        printf("%s\t", temp->col->title);
+        temp = temp->next;
+    }
+    for (int i = 0; i < nb_ligne(tab);i++) {
+        temp = subTab;
+        for (int j = col1; j <= col2; j) {
+            if (i < temp->col->logicalSize) printf("%d", temp->col->values[i]);
+            temp = temp->next;
+        }
+    }
 }
 
 void print_col_names(CDataframe tab) {
@@ -132,15 +165,37 @@ void print_col_names(CDataframe tab) {
     printf("\n");
 }
 
-void add_line(CDataframe* tab) {
-
+void add_line(CDataframe tab,int line) {
+    while (tab != NULL) {
+        if (line >= tab->col->logicalSize) {
+            for (int i = (tab->col->logicalSize - 1); i < line; i++) {
+                insertValue(tab->col, 0);
+            }
+        }
+        else {
+            insertValue(tab->col, 0);
+            for (int i = line; i < (tab->col->logicalSize - 1); i++) {
+                tab->col->values[i + 1] = tab->col->values[i];
+            }
+            tab->col->values[line] = 0;
+        }
+        tab = tab->next;
+    }
 }
 
-void del_line(CDataframe* tab, int line) {
-
+void del_line(CDataframe tab, int line) {
+    while (tab != NULL) {
+        if (line < tab->col->logicalSize) {
+            for (int i = line; i < (tab->col->logicalSize-1); i++) {
+                tab->col->values[i] = tab->col->values[i + 1];
+            }
+            tab->col->values[tab->col->logicalSize - 1] = 0;
+        }
+        tab = tab->next;
+    }
 }
 
-void add_col(CDataframe* tab) {
+void add_col(CDataframe* tab, int col) {
     CDLink* new_link = (CDLink*)malloc(sizeof(CDLink));
     if (new_link == NULL) return;
 
@@ -164,10 +219,12 @@ void add_col(CDataframe* tab) {
     }
 
     CDLink* last = *tab;
-    while (last->next != NULL) {
+    for (int i = 0; i < col && last->next != NULL; i++) {
         last = last->next;
     }
+    CDLink* temp = last->next;
     last->next = new_link;
+    new_link->next = temp;
 }
 
 void del_col(CDataframe* tab, int col) {
