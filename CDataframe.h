@@ -11,7 +11,7 @@ struct CDLink {
 typedef struct CDLink CDLink;
 typedef CDLink* CDataframe;
 
-CDataframe* new_cdataframe();
+CDataframe new_cdataframe();
 
 CDLink* get_cdlink(CDataframe tab, int col);
 

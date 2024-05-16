@@ -1,6 +1,6 @@
 #include "CDataframe.h"
 
-CDataframe* new_cdataframe() {
+CDataframe new_cdataframe() {
 	return NULL;
 }
 
@@ -255,6 +255,8 @@ void rename_cdata_col_input(CDataframe tab) {
 }
 
 void rename_cdata_col(CDataframe tab, int col, char* name) {
+    CDLink* link = get_cdlink(tab, col);
+    if (link != NULL) strcpy(link->col->title, name);
 }
 
 int in_cdata(CDataframe tab, Data x) {
