@@ -5,6 +5,7 @@
 #ifndef PROJET_LANGAGE_C_COLUMN_H
 #define PROJET_LANGAGE_C_COLUMN_H
 #define REALLOC_SIZE 256
+#define TITLE_INPUT_SIZE 256
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
