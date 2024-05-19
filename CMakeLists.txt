@@ -5,4 +5,4 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(Projet_Langage_C main.c
         column.h
-        column.c "CDataframe.c")
+        column.c  "cdata_informations.c" "cdata_creation.c" "cdata_alteration.c" "cdata_value_set.c")

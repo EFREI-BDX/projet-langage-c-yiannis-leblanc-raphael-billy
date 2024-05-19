@@ -22,6 +22,8 @@ Column *createColumn(char* title){
 }
 
 void delete_column(Column** col) {
+    if (*col == NULL) return;
+
     free((*col)->values);
     free((*col)->title);
     free(*col);
