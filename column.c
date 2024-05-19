@@ -6,15 +6,24 @@
 
 Column *createColumn(char* title){
     Column* column = (Column*) malloc(sizeof(Column));
-    column->title= (char*) malloc(sizeof(char)* (strlen(title)+1));
+    if (column == NULL) return NULL;
+
+    column->title = (char*)malloc(sizeof(char) * (strlen(title) + 1));
+    if (column->title == NULL) {
+        free(column);
+        return NULL;
+    }
+
     strcpy(column->title, title);
-    column->logicalSize =0;
+    column->logicalSize = 0;
     column->physicalSize = 0;
     column->values = NULL;
     return column;
 }
 
 void delete_column(Column** col) {
+    if (*col == NULL) return;
+
     free((*col)->values);
     free((*col)->title);
     free(*col);
@@ -47,10 +56,13 @@ int nb_higher_values(Column col, Data x)
     return occurr;
 }
 
-void insertValue(Column *column, Data value){
+void insertValue(Column *column, Data value){ 
     if (column->logicalSize == column->physicalSize){
+        Column* newValues = (Data*)realloc(column->values, column->physicalSize + REALLOC_SIZE * sizeof(Data));
+        if (newValues == NULL) return;
+ 
+        column->values = newValues;
         column->physicalSize += REALLOC_SIZE;
-        column->values = (Data*) realloc(column->values, column->physicalSize * sizeof(Data));
     }
     column->values[column->logicalSize] = value;
     column->logicalSize+=1;
