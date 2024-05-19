@@ -44,6 +44,6 @@ int nb_higher_values(Column col, Data x);
 
 void print_col(Column* col);
 
-void set_col_value(Column col,int index, Data value);
+void set_col_value(Column* col,int index, Data value);
 
 #endif PROJET_LANGAGE_C_COLUMN_H

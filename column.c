@@ -241,4 +241,56 @@ void print_col(Column* col) {
     }
 }
 
+void set_col_value(Column* col, int index, Data value) {
+    if (col->logicalSize <= index) {
+        Data defaultVal;
+        switch (col->type) {
+        case UINT:
+            defaultVal.uint_value = 0;
+            for (int i = (col->logicalSize - 1); i < index; i++) {
+                insertValue(col, defaultVal);
+            }
+            break;
+        case INT:
+            defaultVal.int_value = 0;
+            for (int i = (col->logicalSize - 1); i < index; i++) {
+                insertValue(col, defaultVal);
+            }
+            break;
+        case CHAR:
+            defaultVal.char_value = '\0';
+            for (int i = (col->logicalSize - 1); i < index; i++) {
+                insertValue(col, defaultVal);
+            }
+            break;
+        case FLOAT:
+            defaultVal.float_value = 0.0;
+            for (int i = (col->logicalSize - 1); i < index; i++) {
+                insertValue(col, defaultVal);
+            }
+            break;
+        case DOUBLE:
+            defaultVal.double_value = 0.0;
+            for (int i = (col->logicalSize - 1); i < index; i++) {
+                insertValue(col, defaultVal);
+            }
+            break;
+        case STRING:
+            defaultVal.string_value = NULL;
+            for (int i = (col->logicalSize - 1); i < index; i++) {
+                insertValue(col, defaultVal);
+            }
+            break;
+        case STRUCTURE:
+            defaultVal.struct_value = NULL;
+            for (int i = (col->logicalSize - 1); i < index; i++) {
+                insertValue(col, defaultVal);
+            }
+            break;
+        }
+        
+    }
+    col->values[index] = value;
+}
+
 
