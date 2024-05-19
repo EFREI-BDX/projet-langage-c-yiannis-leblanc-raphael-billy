@@ -10,23 +10,19 @@
 #include <string.h>
 #include <stdio.h>
 
-typedef int Data;
-
 typedef struct {
     char* title;
     int physicalSize;
     int logicalSize;
     Data* values;
+    ENUM_TYPE type;
 } Column;
 
-
-enum enum_type
-{
+typedef enum {
     NULLVAL = 1 , UINT, INT, CHAR, FLOAT, DOUBLE, STRING, STRUCTURE
-};
-typedef enum enum_type ENUM_TYPE;
+} ENUM_TYPE;
 
-union column_type{
+typedef union {
     unsigned int uint_value;
     signed int int_value;
     char char_value;
@@ -34,23 +30,11 @@ union column_type{
     double double_value;
     char* string_value;
     void* struct_value;
-};
-typedef union column_type COL_TYPE ;
-
-
-struct column {
-    char *title;
-    unsigned int size; //logical size
-    unsigned int max_size; //physical size
-    ENUM_TYPE column_type;
-    COL_TYPE **data; // array of pointers to stored data
-    unsigned long long int *index; // array of integers
-};
-typedef struct column COLUMN;
+} Data;
 
 void insertValue(Column *column, Data value);
 
-Column* createColumn(char* title);
+Column* createColumn(ENUM_TYPE type, char* title);
 
 void delete_column(Column** col);
 
@@ -61,5 +45,7 @@ int nb_higher_values(Column col, Data x);
 void print_col(Column* col);
 
 int return_value_by_index(Column col, Data i);
+
+void set_col_value(Column col, Data value);
 
 #endif PROJET_LANGAGE_C_COLUMN_H
