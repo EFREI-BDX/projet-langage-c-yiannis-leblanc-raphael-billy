@@ -7,11 +7,11 @@ Exemple d'utilisation du CDataframe
 
 int main() {
 	ENUM_TYPE type = INT;
-	Column* col = createColumn(type, "Gros caca.");
-	Data val = { .int_value = 0 };
+	Column* col = createColumn(type, "Test");
+	int val;
 	for (int i = 0; i < 5; i++) {
-		val.int_value = i;
-		insertValue(col, val);
+		val = i;
+		insertValue(col, (void*) &val);
 	}
 	print_col(col);
 	return 0;
