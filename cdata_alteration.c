@@ -1,18 +1,16 @@
 #include "CDataframe.h"
 
 void add_line(CDataframe tab, int line) {
-    Data defVal;
     while (tab != NULL) {
-        defVal = defaultValue(tab->col->type);
         if (line >= tab->col->logicalSize) {
-            set_col_value(tab->col, line, defVal);
+            set_col_value(tab->col, line, NULL);
         }
         else {
-            insertValue(tab->col, defVal);
+            insertValue(tab->col, NULL);
             for (int i = line; i < (tab->col->logicalSize - 1); i++) {
                 tab->col->values[i + 1] = tab->col->values[i];
             }
-            tab->col->values[line] = defVal;
+            set_col_value(tab->col, line, NULL);
         }
         tab = tab->next;
     }
@@ -45,7 +43,7 @@ void add_col_input(CDataframe* tab) {
     do {
         printf("Saisir le nom de la colonne : ");
     } while (!scanf("%s", name));
-    ENUM_TYPE type;
+    ENUM_TYPE type = NULLVAL;
     do {
         printf("Saisir le type de la colonne\n(entier non signé : 2, entier : 3, caractere : 4, float : 5, double : 6, chaine de caracteres : 7) : ");
     } while (!scanf("%d", type) || !(type >= UINT && type <= STRING));

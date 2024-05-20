@@ -1,24 +1,67 @@
 #include "CDataframe.h"
 
-void set_value_input(CDataframe* tab) {
+void set_value_input(CDataframe* tab) { // à corriger
     int col;
     int ligne;
-    Data x;
+    CDLink* Link = get_cdlink(*tab, col);
     do {
-        printf("Veuiller saisir la colonne, la ligne, et la valeur (col ligne val) : ");
-    } while ((scanf("%d %d %d", &col, &ligne, &x) < 3) || col < 0 || ligne < 0);
-
-    set_value(tab, col, ligne, x);
+        printf("Saisir la colonne et la ligne de la valeur (a b) : ");
+    } while(scanf("%d %d",&col, &ligne < 2) || col < 0 || ligne < 0);
+    switch (Link->col->type) {
+    case UINT:
+        unsigned int value;
+        do {
+                printf("Saisir la valeur en colonne %d ligne %d : ", col, ligne);
+            } while (!scanf("%d", &value));
+            set_value(tab, col, ligne, (void*)&value);
+        
+    case INT:
+        int value;
+        do {
+                printf("Saisir la valeur en colonne %d ligne %d : ", col, ligne);
+            } while (!scanf("%d", &value));
+            set_value(tab, col, ligne, (void*)&value);
+        
+    case CHAR:
+        char value;
+        do {
+                printf("Saisir la valeur en colonne %d ligne %d : ", col, ligne);
+            } while (!scanf("%c", &value));
+            set_value(tab, col, ligne, (void*)&value);
+        
+    case FLOAT:
+        float value;
+        do {
+                printf("Saisir la valeur en colonne %d ligne %d : ", col, ligne);
+            } while (!scanf("%f", &value));
+            set_value(tab, col, ligne, (void*)&value);
+        
+    case DOUBLE:
+        double value;
+        do {
+                printf("Saisir la valeur en colonne %d ligne %d : ", col, ligne);
+            } while (!scanf("%lf", &value));
+            set_value(tab, col, ligne, (void*)&value);
+        
+    case STRING:
+        char str[TITLE_INPUT_SIZE];
+        do {
+                printf("Saisir la valeur en colonne %d ligne %d : ", col, ligne);
+            } while (!scanf("%s", value));
+            set_value(tab, col, ligne, (void*)value);
+        
+    }
 }
 
-void set_value(CDataframe* tab, int col, int line, Data x) {
+void set_value(CDataframe* tab, int col, int line, void* x) {
     if (col > (nb_colonne(*tab)) - 1) {
+        ENUM_TYPE nul = NULLVAL;
         char vide[TITLE_INPUT_SIZE] = { '\0' };
-        add_col(tab, col, vide);
+        add_col(tab, col, vide,nul);
     }
     CDLink* current_link = get_cdlink(*tab, col);
-    for (int i = (current_link->col->logicalSize - 1); i < line; i++) insertValue(current_link->col, 0);
-    current_link->col->values[line] = x;
+    for (int i = (current_link->col->logicalSize - 1); i < line; i++) insertValue(current_link->col, NULL);
+    set_col_value(current_link->col, line, x);
 }
 
 void rename_cdata_col_input(CDataframe tab) {

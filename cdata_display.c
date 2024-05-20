@@ -26,14 +26,13 @@ void print_cdata_lines(CDataframe tab, int line1, int line2) {
         printf("Impossible d'afficher un CDataframe vide...");
         return;
     }
-
+    char str[TITLE_INPUT_SIZE];
     CDLink* sub_tab;
     for (int j = line1; j <= line2; j++) {
         sub_tab = tab;
         do {
-            if (j < sub_tab->col->logicalSize) {
-                printf("%d", sub_tab->col->values[j]);
-            }
+            get_col_val_str(str, *(sub_tab->col), j);
+            printf("%s", str);
             printf("\t");
             sub_tab = sub_tab->next;
         } while (sub_tab->next != NULL);
@@ -54,10 +53,12 @@ void print_cdata_col(CDataframe tab, int col1, int col2) {
         temp = temp->next;
     }
     printf("\n");
+    char str[TITLE_INPUT_SIZE];
     for (int i = 0; i < nb_ligne(tab); i++) {
         temp = subTab;
         for (int j = col1; j <= col2 && temp != NULL; j++) {
-            if (i < temp->col->logicalSize) printf("%d", temp->col->values[i]);
+            get_col_val_str(str,*temp->col, i);
+            printf("%s", str);
             printf("\t");
             temp = temp->next;
         }

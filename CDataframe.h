@@ -19,7 +19,7 @@ typedef CDLink* CDataframe;
 void add_line(CDataframe tab, int line);
 void del_line(CDataframe tab, int line);
 void add_col_input(CDataframe* tab);
-void add_col(CDataframe* tab, int col, char* name);
+void add_col(CDataframe* tab, int col, char* name, ENUM_TYPE type);
 void del_col(CDataframe* tab, int col);
 
 #endif
@@ -50,12 +50,12 @@ void print_col_names(CDataframe tab);
 #ifndef CDATA_INFORMATIONS_C
 #define CDATA_INFORMATIONS_C
 
-int in_cdata(CDataframe tab, Data x);
+int in_cdata(CDataframe tab, void* x);
 int nb_ligne(CDataframe tab);
 int nb_colonne(CDataframe tab);
-int nb_equal_cdata(CDataframe tab, Data x);
-int nb_higher_cdata(CDataframe tab, Data x);
-int nb_lower_cdata(CDataframe tab, Data x);
+int nb_equal_cdata(CDataframe tab, void* x);
+int nb_higher_cdata(CDataframe tab, void* x);
+int nb_lower_cdata(CDataframe tab, void* x);
 CDLink* get_cdlink(CDataframe tab, int col);
 
 #endif
@@ -66,6 +66,6 @@ CDLink* get_cdlink(CDataframe tab, int col);
 void rename_cdata_col_input(CDataframe tab);
 void rename_cdata_col(CDataframe tab, int col, char* name);
 void set_value_input(CDataframe* tab);//Raph
-void set_value(CDataframe* tab, int col, int line, Data x); //Raph
+void set_value(CDataframe* tab, int col, int line, void* x); //Raph
 
 #endif

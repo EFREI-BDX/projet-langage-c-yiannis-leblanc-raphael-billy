@@ -6,12 +6,13 @@ Exemple d'utilisation du CDataframe
 #include "stdio.h"
 
 int main() {
-	CDataframe tab = new_cdataframe();
-	
-	fill_cdata_input(&tab);
-	print_cdata(tab);
-	printf("FIN\n");
-	del_col(&tab, 2);
-	print_cdata(tab);
+	ENUM_TYPE type = INT;
+	Column* col = createColumn(type, "Gros caca.");
+	Data val = { .int_value = 0 };
+	for (int i = 0; i < 5; i++) {
+		val.int_value = i;
+		insertValue(col, val);
+	}
+	print_col(col);
 	return 0;
 }

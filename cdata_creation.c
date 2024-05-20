@@ -4,7 +4,7 @@ CDataframe new_cdataframe() {
     return NULL;
 }
 
-void fill_blank_cdata(CDataframe* tab, int nbCol, int nbLine) { // Réparer la saisir des lignes
+void fill_blank_cdata(CDataframe* tab, int nbCol, int nbLine) { // Réparer la saisie des lignes
     if (*tab != NULL) {
         printf("Le CDataframe doit être vide...\n");
         return;
@@ -38,8 +38,7 @@ void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
         return;
     }
     char title[TITLE_INPUT_SIZE];
-    Data value;
-    ENUM_TYPE type;
+    ENUM_TYPE type = NULLVAL;
     for (int i = 0; i < nbCol; i++) {
         do {
             printf("Saisir le nom de la colonne %d : ", i);
@@ -48,11 +47,56 @@ void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
             printf("Saisir le type de la colonne\n(entier non signé : 2, entier : 3, caractere : 4, float : 5, double : 6, chaine de caracteres : 7) : ");
         } while (!scanf("%d", type) || !(type >= UINT && type <= STRING));
         add_col(tab, i, title,type);
-        for (int j = 0; j < nbLine; j++) {
-            do {
-                printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
-            } while (!scanf("%d", &value));
-            set_value(tab, i, j, value);
+        switch (type) {
+        case UINT:
+            unsigned int value;
+            for (int j = 0; j < nbLine; j++) {
+                do {
+                    printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
+                } while (!scanf("%d", &value));
+                set_value(tab, i, j, (void*)&value);
+            }
+        case INT:
+            int value;
+            for (int j = 0; j < nbLine; j++) {
+                do {
+                    printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
+                } while (!scanf("%d", &value));
+                set_value(tab, i, j, (void*)&value);
+            }
+        case CHAR:
+            char value;
+            for (int j = 0; j < nbLine; j++) {
+                do {
+                    printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
+                } while (!scanf("%c", &value));
+                set_value(tab, i, j, (void*)&value);
+            }
+        case FLOAT:
+            float value;
+            for (int j = 0; j < nbLine; j++) {
+                do {
+                    printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
+                } while (!scanf("%f", &value));
+                set_value(tab, i, j, (void*)&value);
+            }
+        case DOUBLE:
+            double value;
+            for (int j = 0; j < nbLine; j++) {
+                do {
+                    printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
+                } while (!scanf("%lf", &value));
+                set_value(tab, i, j, (void*)&value);
+            }
+        case STRING:
+            char str[TITLE_INPUT_SIZE];
+            for (int j = 0; j < nbLine; j++) {
+                do {
+                    printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
+                } while (!scanf("%s", value));
+                set_value(tab, i, j, (void*)value);
+            }
         }
+        
     }
 }

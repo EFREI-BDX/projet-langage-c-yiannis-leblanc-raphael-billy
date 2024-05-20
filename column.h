@@ -6,24 +6,27 @@
 #define PROJET_LANGAGE_C_COLUMN_H
 #define REALLOC_SIZE 256
 #define TITLE_INPUT_SIZE 256
+#define SIGNIFICANT_DIGIT 3
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 
-typedef struct {
+struct Column{
     char* title;
     unsigned int physicalSize;
     unsigned int logicalSize;
     Data* values;
     ENUM_TYPE type;
     unsigned int* index;
-} Column;
+};
+typedef struct Column Column;
 
-typedef enum {
+enum  ENUM_TYPE {
     NULLVAL = 1, UINT, INT, CHAR, FLOAT, DOUBLE, STRING, STRUCTURE
-} ENUM_TYPE;
+};
+typedef enum ENUM_TYPE ENUM_TYPE;
 
-typedef union {
+union Data {
     unsigned int uint_value;
     signed int int_value;
     char char_value;
@@ -31,22 +34,27 @@ typedef union {
     double double_value;
     char* string_value;
     void* struct_value;
-} Data;
+};
+typedef union Data Data;
 
-void insertValue(Column *column, Data value);
+int insertValue(Column *column, void* value);
 
 Column* createColumn(ENUM_TYPE type, char* title);
 
 void delete_column(Column** col);
 
-int nb_equal_values(Column col, Data x);
-int nb_lower_values(Column col, Data x);
-int nb_higher_values(Column col, Data x);
+int nb_equal_values(Column col, void* x);
+int nb_lower_values(Column col, void* x);
+int nb_higher_values(Column col, void* x);
 
 void print_col(Column* col);
 
-void set_col_value(Column* col,int index, Data value);
+void set_col_value(Column* col,int index, void* value);
 
 Data defaultValue(ENUM_TYPE type);
+
+void get_col_val_str(char* str, Column col, int index);
+
+int col_size(Column col);
 
 #endif PROJET_LANGAGE_C_COLUMN_H

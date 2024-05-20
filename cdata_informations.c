@@ -1,6 +1,6 @@
 #include "CDataframe.h"
 
-int in_cdata(CDataframe tab, Data x) {
+int in_cdata(CDataframe tab, void* x) {
     if (nb_equal_cdata(tab, x) > 0) {
         return 1;
     }
@@ -11,8 +11,8 @@ int nb_ligne(CDataframe tab) {
     CDLink* maillon = tab;
     int max = 0;
     while (maillon != NULL) {
-        if (maillon->col->logicalSize > max) {
-            max = maillon->col->logicalSize;
+        if (col_size(*maillon->col) > max) {
+            max = col_size(*maillon->col);
         }
         maillon = maillon->next;
     }
@@ -30,7 +30,7 @@ int nb_colonne(CDataframe tab) {
     return nb_col;
 }
 
-int nb_equal_cdata(CDataframe tab, Data x) {
+int nb_equal_cdata(CDataframe tab, void* x) {
     int occurrence = 0;
     CDLink* maillon = tab;
     while (maillon != NULL) {
@@ -40,7 +40,7 @@ int nb_equal_cdata(CDataframe tab, Data x) {
     return occurrence;
 }
 
-int nb_higher_cdata(CDataframe tab, Data x) {
+int nb_higher_cdata(CDataframe tab, void* x) {
     int compteur = 0;
     CDLink* maillon = tab;
     while (maillon != NULL) {
@@ -50,7 +50,7 @@ int nb_higher_cdata(CDataframe tab, Data x) {
     return compteur;
 }
 
-int nb_lower_cdata(CDataframe tab, Data x) {
+int nb_lower_cdata(CDataframe tab, void* x) {
     int compteur = 0;
     CDLink* maillon = tab;
     while (maillon != NULL) {
