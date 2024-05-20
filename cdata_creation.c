@@ -4,21 +4,15 @@ CDataframe new_cdataframe() {
     return NULL;
 }
 
-void fill_blank_cdata(CDataframe* tab, int nbCol, int nbLine) {
+void fill_blank_cdata(CDataframe* tab, int nbCol, int nbLine) { // Réparer la saisir des lignes
     if (*tab != NULL) {
         printf("Le CDataframe doit être vide...\n");
         return;
     }
-    char title[TITLE_INPUT_SIZE];
-    Data value = 0;
+    char title[TITLE_INPUT_SIZE] = { '\0' };
+    ENUM_TYPE nul = NULLVAL;
     for (int i = 0; i < nbCol; i++) {
-        do {
-            printf("Saisir le nom de la colonne %d : ", i);
-        } while (!scanf("%s", title));
-        add_col(tab, i, title);
-        for (int j = 0; j < nbLine; j++) {
-            set_value(tab, i, j, value);
-        }
+        add_col(tab, i, title,nul);
     }
 }
 
@@ -45,11 +39,15 @@ void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
     }
     char title[TITLE_INPUT_SIZE];
     Data value;
+    ENUM_TYPE type;
     for (int i = 0; i < nbCol; i++) {
         do {
             printf("Saisir le nom de la colonne %d : ", i);
         } while (!scanf("%s", title));
-        add_col(tab, i, title);
+        do {
+            printf("Saisir le type de la colonne\n(entier non signé : 2, entier : 3, caractere : 4, float : 5, double : 6, chaine de caracteres : 7) : ");
+        } while (!scanf("%d", type) || !(type >= UINT && type <= STRING));
+        add_col(tab, i, title,type);
         for (int j = 0; j < nbLine; j++) {
             do {
                 printf("Saisir la valeur en colonne %d ligne %d : ", i, j);

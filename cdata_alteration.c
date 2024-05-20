@@ -47,8 +47,8 @@ void add_col_input(CDataframe* tab) {
     } while (!scanf("%s", name));
     ENUM_TYPE type;
     do {
-        printf("Saisir le type de la colonne\n(entier non signé : 2, entier : 3, caractere : 4, float : 5, double : 6, chaine de caracteres : 7, structure : 8) : ");
-    } while (!scanf("%d", type) || !(type >= UINT && type <= STRUCTURE));
+        printf("Saisir le type de la colonne\n(entier non signé : 2, entier : 3, caractere : 4, float : 5, double : 6, chaine de caracteres : 7) : ");
+    } while (!scanf("%d", type) || !(type >= UINT && type <= STRING));
     add_col(tab, col, name,type);
 }
 
