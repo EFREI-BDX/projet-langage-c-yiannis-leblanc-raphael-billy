@@ -1,5 +1,6 @@
 #include "column.h"
 #include <stdlib.h>
+#include <windows.h>
 
 #ifndef CDATAFRAME_H
 #define CDATAFRAME_H
@@ -67,5 +68,12 @@ void rename_cdata_col_input(CDataframe tab);
 void rename_cdata_col(CDataframe tab, int col, char* name);
 void set_value_input(CDataframe* tab);//Raph
 void set_value(CDataframe* tab, int col, int line, Data x); //Raph
+
+#endif
+
+#ifndef CDATA_CONSOLE_MENU_C
+#define CDATA_CONSOLE_MENU_C
+
+void menu();
 
 #endif
