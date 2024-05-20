@@ -42,7 +42,7 @@ void print_cdata_col_input(CDataframe tab);
 void print_cdata_col(CDataframe tab, int col1, int col2);
 void print_cdata_lines_input(CDataframe tab);//Raph
 void print_cdata_lines(CDataframe tab, int line1, int line2);
-void print_cdata(CDataframe tab);//Raph *s'appuyer sur les fct print_cdata_col() et nb_colonne()*
+void print_cdata(CDataframe tab);
 void print_col_names(CDataframe tab);
 
 #endif

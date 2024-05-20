@@ -1,12 +1,12 @@
 #include "CDataframe.h"
 
 void set_value_input(CDataframe* tab) { // à corriger
-    int col;
-    int ligne;
-    CDLink* Link = get_cdlink(*tab, col);
+    int col = 0;
+    int ligne = 0;
     do {
         printf("Saisir la colonne et la ligne de la valeur (a b) : ");
     } while(scanf("%d %d",&col, &ligne < 2) || col < 0 || ligne < 0);
+    CDLink* Link = get_cdlink(*tab, col);
     switch (Link->col->type) {
     case UINT:
         unsigned int value;
@@ -16,35 +16,35 @@ void set_value_input(CDataframe* tab) { // à corriger
             set_value(tab, col, ligne, (void*)&value);
         
     case INT:
-        int value;
+        int value = 0;
         do {
                 printf("Saisir la valeur en colonne %d ligne %d : ", col, ligne);
             } while (!scanf("%d", &value));
             set_value(tab, col, ligne, (void*)&value);
         
     case CHAR:
-        char value;
+        char value = 0;
         do {
                 printf("Saisir la valeur en colonne %d ligne %d : ", col, ligne);
             } while (!scanf("%c", &value));
             set_value(tab, col, ligne, (void*)&value);
         
     case FLOAT:
-        float value;
+        float value = 0.0;
         do {
                 printf("Saisir la valeur en colonne %d ligne %d : ", col, ligne);
             } while (!scanf("%f", &value));
             set_value(tab, col, ligne, (void*)&value);
         
     case DOUBLE:
-        double value;
+        double value = 0.0;
         do {
                 printf("Saisir la valeur en colonne %d ligne %d : ", col, ligne);
             } while (!scanf("%lf", &value));
             set_value(tab, col, ligne, (void*)&value);
         
     case STRING:
-        char str[TITLE_INPUT_SIZE];
+        char str[TITLE_INPUT_SIZE] = { '\0' };
         do {
                 printf("Saisir la valeur en colonne %d ligne %d : ", col, ligne);
             } while (!scanf("%s", value));

@@ -49,7 +49,7 @@ void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
         add_col(tab, i, title,type);
         switch (type) {
         case UINT:
-            unsigned int value;
+            unsigned int value = 0;
             for (int j = 0; j < nbLine; j++) {
                 do {
                     printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
@@ -57,7 +57,7 @@ void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
                 set_value(tab, i, j, (void*)&value);
             }
         case INT:
-            int value;
+            int value = 0;
             for (int j = 0; j < nbLine; j++) {
                 do {
                     printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
@@ -65,7 +65,7 @@ void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
                 set_value(tab, i, j, (void*)&value);
             }
         case CHAR:
-            char value;
+            char value = 0;
             for (int j = 0; j < nbLine; j++) {
                 do {
                     printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
@@ -73,7 +73,7 @@ void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
                 set_value(tab, i, j, (void*)&value);
             }
         case FLOAT:
-            float value;
+            float value = 0.0;
             for (int j = 0; j < nbLine; j++) {
                 do {
                     printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
@@ -81,7 +81,7 @@ void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
                 set_value(tab, i, j, (void*)&value);
             }
         case DOUBLE:
-            double value;
+            double value = 0.0;
             for (int j = 0; j < nbLine; j++) {
                 do {
                     printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
@@ -89,7 +89,7 @@ void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
                 set_value(tab, i, j, (void*)&value);
             }
         case STRING:
-            char str[TITLE_INPUT_SIZE];
+            char str[TITLE_INPUT_SIZE] = { '\0' };
             for (int j = 0; j < nbLine; j++) {
                 do {
                     printf("Saisir la valeur en colonne %d ligne %d : ", i, j);
