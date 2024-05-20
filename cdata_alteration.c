@@ -1,18 +1,18 @@
 #include "CDataframe.h"
 
 void add_line(CDataframe tab, int line) {
+    Data defVal;
     while (tab != NULL) {
+        defVal = defaultValue(tab->col->type);
         if (line >= tab->col->logicalSize) {
-            for (int i = (tab->col->logicalSize - 1); i < line; i++) {
-                insertValue(tab->col, 0);
-            }
+            set_col_value(tab->col, line, defVal);
         }
         else {
-            insertValue(tab->col, 0);
+            insertValue(tab->col, defVal);
             for (int i = line; i < (tab->col->logicalSize - 1); i++) {
                 tab->col->values[i + 1] = tab->col->values[i];
             }
-            tab->col->values[line] = 0;
+            tab->col->values[line] = defVal;
         }
         tab = tab->next;
     }
@@ -20,11 +20,17 @@ void add_line(CDataframe tab, int line) {
 
 void del_line(CDataframe tab, int line) {
     while (tab != NULL) {
+        switch (tab->col->type) {
+        case STRING:
+            free(tab->col->values[line].string_value);
+        case STRUCTURE:
+            free(tab->col->values[line].struct_value);
+        }
         if (line < tab->col->logicalSize) {
             for (int i = line; i < (tab->col->logicalSize - 1); i++) {
                 tab->col->values[i] = tab->col->values[i + 1];
             }
-            tab->col->values[tab->col->logicalSize - 1] = 0;
+            tab->col->logicalSize--;
         }
         tab = tab->next;
     }
@@ -39,21 +45,26 @@ void add_col_input(CDataframe* tab) {
     do {
         printf("Saisir le nom de la colonne : ");
     } while (!scanf("%s", name));
-    add_col(tab, col, name);
+    ENUM_TYPE type;
+    do {
+        printf("Saisir le type de la colonne\n(entier non signé : 2, entier : 3, caractere : 4, float : 5, double : 6, chaine de caracteres : 7, structure : 8) : ");
+    } while (!scanf("%d", type) || !(type >= UINT && type <= STRUCTURE));
+    add_col(tab, col, name,type);
 }
 
 
-void add_col(CDataframe* tab, int col, char* name) {
+void add_col(CDataframe* tab, int col, char* name, ENUM_TYPE type) {
     if (col > nb_colonne(*tab)) {
         char* vide = { '\0' };
-        add_col(tab, (col - 1), vide);
+        ENUM_TYPE noType = NULLVAL;
+        add_col(tab, (col - 1), vide,noType);
     }
     if (col > nb_colonne(*tab)) return;
 
     CDLink* new_link = (CDLink*)malloc(sizeof(CDLink));
     if (new_link == NULL) return;
 
-    Column* new_col = createColumn(name);
+    Column* new_col = createColumn(type, name);
     if (new_col == NULL) {
         free(new_link);
         return;

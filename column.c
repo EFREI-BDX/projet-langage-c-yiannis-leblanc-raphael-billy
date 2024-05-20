@@ -19,6 +19,7 @@ Column *createColumn(ENUM_TYPE type, char* title){
     column->physicalSize = 0;
     column->values = NULL;
     column->type = type;
+    column->index = NULL;
     return column;
 }
 
@@ -27,6 +28,7 @@ void delete_column(Column** col) {
 
     free((*col)->values);
     free((*col)->title);
+    free((*col)->index);
     free(*col);
 }
 
@@ -293,4 +295,30 @@ void set_col_value(Column* col, int index, Data value) {
     col->values[index] = value;
 }
 
-
+Data defaultValue(ENUM_TYPE type) {
+    Data defaultVal;
+    switch (type) {
+    case UINT:
+        defaultVal.uint_value = 0;
+        break;
+    case INT:
+        defaultVal.int_value = 0;
+        break;
+    case CHAR:
+        defaultVal.char_value = '\0';
+        break;
+    case FLOAT:
+        defaultVal.float_value = 0.0;
+        break;
+    case DOUBLE:
+        defaultVal.double_value = 0.0;
+        break;
+    case STRING:
+        defaultVal.string_value = NULL;
+        break;
+    case STRUCTURE:
+        defaultVal.struct_value = NULL;
+        break;
+    }
+    return defaultVal;
+}

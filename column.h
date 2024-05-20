@@ -12,14 +12,15 @@
 
 typedef struct {
     char* title;
-    int physicalSize;
-    int logicalSize;
+    unsigned int physicalSize;
+    unsigned int logicalSize;
     Data* values;
     ENUM_TYPE type;
+    unsigned int* index;
 } Column;
 
 typedef enum {
-    NULLVAL = 1 , UINT, INT, CHAR, FLOAT, DOUBLE, STRING, STRUCTURE
+    NULLVAL = 1, UINT, INT, CHAR, FLOAT, DOUBLE, STRING, STRUCTURE
 } ENUM_TYPE;
 
 typedef union {
@@ -45,5 +46,7 @@ int nb_higher_values(Column col, Data x);
 void print_col(Column* col);
 
 void set_col_value(Column* col,int index, Data value);
+
+Data defaultValue(ENUM_TYPE type);
 
 #endif PROJET_LANGAGE_C_COLUMN_H
