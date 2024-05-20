@@ -182,16 +182,17 @@ int nb_higher_values(Column col, void* x) {
     return occurr;
 }
 
-void insertValue(Column *column, void* value){
+int insertValue(Column *column, void* value){
     if (column->logicalSize == column->physicalSize) {
         Column* newValues = (Data*)realloc(column->values, column->physicalSize + REALLOC_SIZE * sizeof(Data));
-        if (newValues == NULL) return;
+        if (newValues == NULL) return 0;
 
         column->values = newValues;
         column->physicalSize += REALLOC_SIZE;
     }
     set_col_value(column, column->logicalSize, value);
     column->logicalSize += 1;
+    return 1;
 }
 
 void print_col(Column* col) {
