@@ -96,6 +96,6 @@ void del_col(CDataframe* tab, int col) {
     }
     CDLink* temp = (*previous)->next;
     (*previous) = temp->next;
-    delete_column(&temp->next);
+    delete_column(&temp->col);
     free(temp);
 }
