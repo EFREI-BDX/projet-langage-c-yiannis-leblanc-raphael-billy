@@ -6,7 +6,7 @@ CDataframe new_cdataframe() {
 
 void fill_blank_cdata(CDataframe* tab, int nbCol, int nbLine) {
     if (*tab != NULL) {
-        printf("Le CDataframe doit être vide...\n");
+        printf("Le CDataframe doit etre vide...\n");
         return;
     }
     char title[TITLE_INPUT_SIZE];
@@ -40,7 +40,7 @@ void fill_cdata_input(CDataframe* tab) {
 
 void fill_cdata(CDataframe* tab, int nbCol, int nbLine) {
     if (*tab != NULL) {
-        printf("Le CDataframe doit être vide...\n");
+        printf("Le CDataframe doit etre vide...\n");
         return;
     }
     char title[TITLE_INPUT_SIZE];

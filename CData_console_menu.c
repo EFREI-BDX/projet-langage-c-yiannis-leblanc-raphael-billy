@@ -22,10 +22,14 @@ void menu() {
 	printf("Attention :\n\nDans ce CDataframe les colonnes et les lignes sont numerotees a partir de 0,\n\nIl est tout a fait possible de saisir une valeur sur des coordonnees qui n'existent pas encore,\n\nLe programme pourra ajouter des colonnes ou des lignes vierges si besoin,\n\nPar defaut les valeurs non renseignees valent 0.\n\nBonne experience !\n\n");
 	CDataframe tab = new_cdataframe();
 	Commande choix = NULLVAL;
-	Sleep(3000);
+	for (int i = 0; i < 3; i++) {
+		Sleep(1000);
+		printf(".");
+	}
+	printf("\n");
 	printf("Votre CDataframe est vide, choisissez parmi l'une de ces commandes : \n\n");
 	printf("1 : Creer un tableau a partir de valeurs par defaut.\n");
-	printf("2 : Creer un tableau à partir de valeurs saisies.\n\n");
+	printf("2 : Creer un tableau a partir de valeurs saisies.\n\n");
 	do { 
 		printf("Saisissez l'une des deux propositions (seulement le chiffre) : "); 
 	} while (!scanf("%d", &choix) || !(choix == TAB_AUTO || choix == TAB_MANUEL));
@@ -69,7 +73,7 @@ void menu() {
 			break;
 		case DEL_COL:
 			do {
-				printf("Saisir la colonne à supprimer : ");
+				printf("Saisir la colonne a supprimer : ");
 			} while (!scanf("%d", &input) || input < 0);
 			del_col(&tab, input);
 			break;
@@ -83,27 +87,48 @@ void menu() {
 			do {
 				printf("Saisir position de la ligne à supprimer : ");
 			} while (!scanf("%d", &input) || input < 0);
-			add_line(&tab, input);
+			del_line(tab, input);
 			break;
 		case PRINT:
 			print_cdata(tab);
-			Sleep(3000);
+			for (int i = 0; i < 3; i++) {
+				Sleep(1000);
+				printf(".");
+			}
+			printf("\n");
 			break;
 		case PRINT_COL:
 			print_cdata_col_input(tab);
-			Sleep(3000);
+			for (int i = 0; i < 3; i++) {
+				Sleep(1000);
+				printf(".");
+			}
+			printf("\n");
 			break;
 		case PRINT_LINE:
 			print_cdata_lines_input(tab);
-			Sleep(3000);
+			for (int i = 0; i < 3; i++) {
+				Sleep(1000);
+				printf(".");
+			}
+			printf("\n");
 			break;
 		case QUIT:
-			printf("A bientot...");
-			Sleep(3000);
+			printf("A bientot");
+			
+			for (int i = 0; i < 3; i++) {
+				Sleep(1000);
+				printf(".");
+			}
+			Sleep(1000);
 			return;
 		default :
-			printf("Une erreur s'est produite...\n");
-			Sleep(3000);
+			printf("Une erreur s'est produite");
+			for (int i = 0; i < 3; i++) {
+				Sleep(1000);
+				printf(".");
+			}
+			printf("\n");
 			return;
 		}
 		printf("\n");

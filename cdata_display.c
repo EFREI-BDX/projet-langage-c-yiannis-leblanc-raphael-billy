@@ -3,7 +3,7 @@
 void print_cdata_col_input(CDataframe tab) {
     int col1, col2;
     do {
-        printf("Saisir les première et dernière colonnes affichée (a b) : ");
+        printf("Saisir les premiere et derniere colonne affichees (a b) : ");
     } while (scanf("%d %d", &col1, &col2) < 2 || col1 > col2 || col1 < 0 || col2 < 0);
     print_cdata_col(tab, col1, col2);
 }
@@ -12,7 +12,7 @@ void print_cdata_lines_input(CDataframe tab) {
     int line1;
     int line2;
     do {
-        printf("De quelle ligne à quelle ligne voulez-vous afficher ? : ");
+        printf("De quelle ligne a quelle ligne voulez-vous afficher (a b) : ");
     } while ((scanf("%d %d", &line1, &line2) != 2) || line1 > line2 || line1 < 0 || line2 < 0);
     print_cdata_lines(tab, line1, line2);
 }
@@ -74,7 +74,7 @@ void print_col_names(CDataframe tab) {
     int i = 0;
     CDLink* maillon = tab;
     while (maillon != NULL) {
-        printf("colonne numéro %d : %s\t", i++, maillon->col->title);
+        printf("colonne numero %d : %s\t", i++, maillon->col->title);
         maillon = maillon->next;
     }
     printf("\n");

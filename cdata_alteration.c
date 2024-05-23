@@ -24,7 +24,7 @@ void del_line(CDataframe tab, int line) {
             for (int i = line; i < (tab->col->logicalSize - 1); i++) {
                 tab->col->values[i] = tab->col->values[i + 1];
             }
-            tab->col->values[tab->col->logicalSize - 1] = 0;
+            tab->col->logicalSize--;
         }
         tab = tab->next;
     }
@@ -45,7 +45,7 @@ void add_col_input(CDataframe* tab) {
 
 void add_col(CDataframe* tab, int col, char* name) {
     if (col > nb_colonne(*tab)) {
-        char* vide = { '\0' };
+        char vide[TITLE_INPUT_SIZE] = {'\0'};
         add_col(tab, (col - 1), vide);
     }
     if (col > nb_colonne(*tab)) return;

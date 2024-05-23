@@ -2,7 +2,7 @@
 Exemple d'utilisation du CDataframe
 */
 
-#include "CDataframe.h"
+#include "cdataframe.h"
 #include "stdio.h"
 
 int main() {
