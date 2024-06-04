@@ -11,8 +11,6 @@ La structure maillon CDLink contient :
 - la taille de celui-ci
 - L'adresse de CDLink suivant
 
-
-
 ## Liens utiles
 
  - [Repository](https://github.com/EFREI-BDX/projet-langage-c-yiannis-leblanc-raphael-billy)
@@ -22,3 +20,20 @@ La structure maillon CDLink contient :
 
 - [@YiannisLeblanc](https://github.com/YiannisLeblanc)
 - [@RaphaelBilly](https://github.com/RaphaelBilly)
+
+## PATCHS
+
+### Upgrade partie 1
+
+L'objectif est "d'encapsuler" efficacement le column.h afin de faciliter la transition vers la généralisation :
+- Modifier toutes les fcts du cdataframe.h qui manipules les attributs de la Column;
+- Créer des fonctions tel que set_col_value() qui permettrons d'encapsuler la structure;
+
+#### fcts du cdataframe.h à modifier :
+
+- add_line();
+- dell_line();
+- print_cdata_lines();
+- print_cdata_col();
+- print_col_names
+- nb_ligne();
