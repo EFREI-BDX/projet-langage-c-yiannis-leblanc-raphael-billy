@@ -42,7 +42,6 @@ void add_col_input(CDataframe* tab) {
     add_col(tab, col, name);
 }
 
-
 void add_col(CDataframe* tab, int col, char* name) {
     if (col > nb_colonne(*tab)) {
         char vide[TITLE_INPUT_SIZE] = {'\0'};
@@ -65,12 +64,14 @@ void add_col(CDataframe* tab, int col, char* name) {
         return;
     }
 
-    CDLink* last = *tab;
-    for (int i = 0; i < col && last->next != NULL; i++) {
-        last = last->next;
+    CDLink** previous = tab;
+    for (int i = 0; i < (col - 1); i++) {
+        if ((*previous)->next == NULL) return;
+
+        previous = &(*previous)->next;
     }
-    CDLink* temp = last->next;
-    last->next = new_link;
+    CDLink* temp = (*previous)->next;
+    (*previous)->next = new_link;
     new_link->next = temp;
 }
 
