@@ -19,18 +19,24 @@ typedef struct {
     Data* values;
 } Column;
 
-void insertValue(Column *column, Data value);
+void insertValue(Column *column, void* value);
+
+void set_col_value(Column* column, int index, void* val);
 
 Column* createColumn(char* title);
 
 void delete_column(Column** col);
 
-int nb_equal_values(Column col, Data x);
-int nb_lower_values(Column col, Data x);
-int nb_higher_values(Column col, Data x);
+int nb_equal_values(Column col, void* x);
+int nb_lower_values(Column col, void* x);
+int nb_higher_values(Column col, void* x);
+
+int col_len(Column col);
 
 void print_col(Column* col);
 
-int return_value_by_index(Column col, Data i);
+char* return_col_val_str(Column col, int i);
+
+void* return_col_value(Column col, int i);
 
 #endif PROJET_LANGAGE_C_COLUMN_H

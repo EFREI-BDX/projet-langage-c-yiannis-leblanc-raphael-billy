@@ -2,17 +2,17 @@
 
 void add_line(CDataframe tab, int line) {
     while (tab != NULL) {
-        if (line >= tab->col->logicalSize) {
-            for (int i = (tab->col->logicalSize - 1); i < line; i++) {
+        if (line >= col_len(*tab->col)) {
+            for (int i = (col_len(*tab->col) - 1); i < line; i++) {
                 insertValue(tab->col, 0);
             }
         }
         else {
             insertValue(tab->col, 0);
-            for (int i = line; i < (tab->col->logicalSize - 1); i++) {
-                tab->col->values[i + 1] = tab->col->values[i];
+            for (int i = line; i < (col_len(*tab->col) - 1); i++) {
+                set_col_value(tab->col, i + 1, return_col_value(*tab->col, i));
             }
-            tab->col->values[line] = 0;
+            set_col_value(tab->col, line, NULL);
         }
         tab = tab->next;
     }
@@ -20,11 +20,10 @@ void add_line(CDataframe tab, int line) {
 
 void del_line(CDataframe tab, int line) {
     while (tab != NULL) {
-        if (line < tab->col->logicalSize) {
-            for (int i = line; i < (tab->col->logicalSize - 1); i++) {
-                tab->col->values[i] = tab->col->values[i + 1];
+        if (line < col_len(*tab->col)) {
+            for (int i = line; i < (col_len(*tab->col) - 1); i++) {
+                set_col_value(tab->col, i, return_col_value(*tab->col, i + 1));
             }
-            tab->col->logicalSize--;
         }
         tab = tab->next;
     }

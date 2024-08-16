@@ -11,8 +11,8 @@ int nb_ligne(CDataframe tab) {
     CDLink* maillon = tab;
     int max = 0;
     while (maillon != NULL) {
-        if (maillon->col->logicalSize > max) {
-            max = maillon->col->logicalSize;
+        if (col_len(*maillon->col) > max) {
+            max = col_len(*maillon->col);
         }
         maillon = maillon->next;
     }

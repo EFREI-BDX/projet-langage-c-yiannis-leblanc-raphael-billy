@@ -31,8 +31,8 @@ void print_cdata_lines(CDataframe tab, int line1, int line2) {
     for (int j = line1; j <= line2; j++) {
         sub_tab = tab;
         do {
-            if (j < sub_tab->col->logicalSize) {
-                printf("%d", sub_tab->col->values[j]);
+            if (j < col_len(*sub_tab->col)) {
+                printf("%s", return_col_val_str(*sub_tab->col, j));
             }
             printf("\t");
             sub_tab = sub_tab->next;
@@ -49,7 +49,7 @@ void print_cdata_col(CDataframe tab, int col1, int col2) {
 
     CDataframe subTab = get_cdlink(tab, col1);
     CDLink* temp = subTab;
-    for (int i = col1; i <= col2 && temp != NULL; i++) {
+    for (int i = col1; i <= col2 && temp != NULL; i++) { // penser à supprimer la boucle lors du passage à la LC pour Column
         printf("%s\t", temp->col->title);
         temp = temp->next;
     }
@@ -57,7 +57,7 @@ void print_cdata_col(CDataframe tab, int col1, int col2) {
     for (int i = 0; i < nb_ligne(tab); i++) {
         temp = subTab;
         for (int j = col1; j <= col2 && temp != NULL; j++) {
-            if (i < temp->col->logicalSize) printf("%d", temp->col->values[i]);
+            if (i < col_len(*temp->col)) printf("%s", return_col_val_str(*temp->col, i));
             printf("\t");
             temp = temp->next;
         }
@@ -65,7 +65,7 @@ void print_cdata_col(CDataframe tab, int col1, int col2) {
     }
 }
 
-void print_col_names(CDataframe tab) {
+void print_col_names(CDataframe tab) { // fct à supprimer
     if (tab == NULL) {
         printf("Impossible d'afficher un CDataframe vide...\n");
         return;

@@ -74,7 +74,7 @@ void print_col(Column* col){
 }
 
 
-int return_value_by_index(Column col, Data i){
+void* return_col_value(Column col, Data i){
     return col.values[i];
 }
 

@@ -31,9 +31,19 @@ L'objectif est "d'encapsuler" efficacement le column.h afin de faciliter la tran
 
 #### fcts du cdataframe.h à modifier :
 
-- add_line();
-- dell_line();
-- print_cdata_lines();
-- print_cdata_col();
-- print_col_names
-- nb_ligne();
+- add_line(); OK
+- dell_line(); OK
+- print_cdata_lines(); OK
+- print_cdata_col(); OK
+- print_col_names(); à suppr
+- nb_ligne(); OK
+
+#### fcts du column.h à rajouter/modifier :
+
+- void insertValue(Column*, void*);
+- void set_col_value(Column*, void*);
+- int nb_equal_values(Column col, void* x);
+- int nb_lower_values(Column col, void* x);
+- int nb_higher_values(Column col, void* x);
+- int col_len(Column col);
+- void* return_value_by_index(Column col, int i);
